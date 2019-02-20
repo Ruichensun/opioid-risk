@@ -27,11 +27,10 @@ data("fifty_states")
 population = read.csv("2010+Census+Population+By+Zipcode+(ZCTA).csv", header = T, stringsAsFactors = F)
 # Opioid Prescriging Data - Medicare Part D - 2016
 OpioidPrescribing_D = read_excel_allsheets("Medicare_Part_D_Opioid_Prescribing_Geographic_2016.xlsx")$County
-
-crimes <- data.frame(state = tolower(rownames(USArrests)), USArrests)
-p <- ggplot(crimes, aes(map_id = state)) + 
+drug_data = read.csv("2016-ACA-premium.csv", header = T, stringsAsFactors = F)
+p <- ggplot(drug_data, aes(map_id = state)) + 
   # map points to the fifty_states shape data
-  geom_map(aes(fill = Assault), map = fifty_states) + 
+  geom_map(aes(fill = Average.of.Premium.Adult.Individual.Age.30), map = fifty_states) + 
   expand_limits(x = fifty_states$long, y = fifty_states$lat) +
   coord_map() +
   scale_x_continuous(breaks = NULL) + 
